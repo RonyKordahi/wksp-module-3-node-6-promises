@@ -22,4 +22,13 @@ function getIssPosition() {
         .catch(err => console.log(err))
 }
 
-getIssPosition();
+// NOTE:
+// the data WITHIN the promise chain (in its own then)
+
+// You are 'returning' the value, beacause you will need this functionality
+// in another exercise.
+
+// If you console.log the the function call, you will not see the result as console.log
+// doesn't wait for the promise to be resolved to execute.
+
+// psst.... don't forget to call the function

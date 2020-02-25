@@ -8,31 +8,19 @@
 // (a number) and nothing else
 
 const darksky = require("dark-sky");
-const opencage = require("opencage-api-client");
-const request = require('request-promise');
+
+const DARKSKY = new darksky("47530ffe53e630910fdffd145cf419e9");
 
 // Given a position (latitude and longitude), returns the position
-function getCurrentTemperatureAtPosition(position) {
-    const requestObj = {
-        key: '1315122032774d06b34c570f3bd70f7b',
-        q: position
-    };
+function getCurrentTemperatureAtPosition(lat, lng) {
 
-    return location()
-        .then(function() {
-            opencage.geocode(requestObj)
-                .then(data => {
-                    if (data.status.code == 200) {
-                        if (data.results.length > 0) {
-                            const place = data.results[0];
-                            console.log(place.geometry);
-                            return place;
-                        }
-                    }
-                })
+    DARKSKY 
+        .latitude(lat)
+        .longitude(lng)
+        .get()
+        .then(function(temp) {
+            console.log(temp.currently.temperature);
         })
-        
-    // darksky
 }
 
-console.log(getCurrentTemperatureAtPosition('1455 Boulevard de Maisonneuve O, Montréal, QC H3G 1M8'));
+getCurrentTemperatureAtPosition('45.55445', "-74.329");
